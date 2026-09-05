@@ -1,0 +1,31 @@
+name: Targeting Service CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - TC_fase03
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  
+  ci:
+    name: Targeting Service CI
+
+    uses: astronomaelaine/CI-reusable-source-py/.github/workflows/ci-reusable.yml@main
+    
+
+    permissions:
+      contents: read
+      id-token: write
+
+    with:
+      aws-region: ${{ vars.AWS_REGION }}
+      aws-role-arn: ${{ vars.AWS_ROLE_ARN }}
+      ecr-repository: ${{ vars.ECR_REPOSITORY }}
+      image-name: "targeting-service"
+      app-version: ${{ vars.APP_VERSION }}
